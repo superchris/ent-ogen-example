@@ -5,16 +5,15 @@ import (
     "log"
     "net/http"
 
-    "entgo.io/ent/dialect"
     "entgo.io/ent/dialect/sql/schema"
     "github.com/superchris/ent-ogen-example/ent"
     "github.com/superchris/ent-ogen-example/ent/ogent"
-    _ "github.com/mattn/go-sqlite3"
+    _ "github.com/lib/pq"
 )
 
 func main() {
     // Create ent client.
-    client, err := ent.Open(dialect.SQLite, "file:ent?mode=memory&cache=shared&_fk=1")
+    client, err := ent.Open("postgres", "postgresql://root@localhost:26257/defaultdb?sslmode=disable")
     if err != nil {
         log.Fatal(err)
     }
